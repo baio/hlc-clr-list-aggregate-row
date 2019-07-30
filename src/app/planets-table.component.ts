@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { SWAPIService } from './swapi.service';
 
 // Provide table UI definition in js object
-const table: TableDescription = {
+const definition: Table.Definition = {
     cols: [
         {
             id: 'name',
@@ -17,21 +17,20 @@ const table: TableDescription = {
             title: 'Population',
             sort: false
         }
-    ]
-};
-
-const aggregate: Table.AggregateRow = {
+    ],
+    aggregateRow: {
   population: (vals: number[]) => vals.reduce((acc, v) => acc + (v || 0), 0)
+}
+
 };
 
 @Component({
     selector: 'my-planets-table',
-    template: '<hlc-clr-table [aggregateRow]="aggregate" [table]="table" [dataProvider]="dataProvider"></hlc-clr-table>',
+    template: '<hlc-clr-table [definition]="definition" [dataProvider]="dataProvider"></hlc-clr-table>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
-    readonly table = table;
-    readonly aggregate = aggregate;
+    readonly defintion = definition;
     readonly dataProvider: Table.Data.DataProvider;    
 
     constructor(swapi: SWAPIService) {
