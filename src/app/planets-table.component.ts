@@ -30,7 +30,7 @@ const definition: Table.Definition = {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
-    readonly defintion = definition;
+    readonly definition = definition;
     readonly dataProvider: Table.Data.DataProvider;    
 
     constructor(swapi: SWAPIService) {
